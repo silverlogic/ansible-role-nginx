@@ -103,6 +103,39 @@ nginx_set_real_ip_from_cloudflare: True
 nginx_amplify: true
 nginx_amplify_api_key: "your_api_key_goes_here"
 nginx_amplify_update_agent: true
+
+# Define modules to enable in configuration
+#
+# Nginx installed via EPEL and APT repos will also install some modules automatically.
+# For official Nginx repo use you will need to install module packages manually.
+#
+# When using with EPEL and APT repos, specify this section as a list of configuration
+# file names, minus the .conf file name extension.
+
+# When using the official Nginx repo, specify this section as list of module file
+# names, minus the .so file name extension.
+#
+# Available module config files in EPEL and APT repos:
+# (APT actually has several more, see https://wiki.debian.org/Nginx/)
+# - mod-http-geoip
+# - mod-http-image-filter
+# - mod-http-perl
+# - mod-http-xslt-filter
+# - mod-mail
+# - mod-stream
+#
+# Available module filenames in Official NGINX repo:
+# - ngx_http_geoip_module
+# - ngx_http_image_filter_module
+# - ngx_http_perl_module
+# - ngx_http_xslt_filter_module
+# - ngx_http_js_module
+#
+# Custom compiled modules are ok too if the .so file exists in same location as a packaged module would be:
+# - ngx_http_modsecurity_module
+#
+nginx_module_configs:
+  - mod-http-geoip
 ```
 
 Examples
@@ -277,7 +310,7 @@ Additional configurations are created in /etc/nginx/conf.d/
                proxy_set_header Host $myhost;
              }
 ```
-## 8) Example to use this role with my ssl-certs role to generate or copie ssl certificate ( https://galaxy.ansible.com/jdauphant/ssl-certs )
+## 8) Example to use this role with my ssl-certs role to generate or copy ssl certificate ( https://galaxy.ansible.com/jdauphant/ssl-certs )
 ```yaml
  - hosts: all
    roles:
